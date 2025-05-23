@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dell\\.nuget\\packages\\": {}
+    "C:\\Users\\kacpe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt PZ2\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
+      "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
       "projectName": "SystemWystawianiaOpiniiRestauracjom",
-      "projectPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt PZ2\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
-      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt PZ2\\SystemWystawianiaOpiniiRestauracjom\\obj\\",
+      "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
+      "packagesPath": "C:\\Users\\kacpe\\.nuget\\packages\\",
+      "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kacpe\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -62,7 +62,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "D:\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
       }
     }
   }

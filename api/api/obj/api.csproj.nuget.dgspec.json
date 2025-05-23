@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj": {}
+    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj": {
+    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
-        "projectName": "SystemWystawianiaOpiniiRestauracjom",
-        "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\SystemWystawianiaOpiniiRestauracjom.csproj",
+        "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
+        "projectName": "api",
+        "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
         "packagesPath": "C:\\Users\\kacpe\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\obj\\",
+        "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kacpe\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,16 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
