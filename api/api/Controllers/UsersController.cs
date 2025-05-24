@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using DTOs;
 using Models;
 
-// ... (Make sure to include your DTOs here or in a shared DTOs namespace) ...
-
 [ApiController]
-[Route("api/[controller]")] // This will make the base route "api/Users"
+[Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly ContextDb _context;
@@ -16,8 +16,6 @@ public class UsersController : ControllerBase
         _context = context;
     }
 
-    // POST: api/Users
-    // Adds a new user
     [HttpPost]
     public async Task<ActionResult<UserDto>> AddUser([FromBody] AddUserDto addUserDto)
     {
@@ -26,7 +24,6 @@ public class UsersController : ControllerBase
             return BadRequest("Login and Password are required.");
         }
 
-        // Check if user with same login already exists
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Login != null && u.Login.ToLower() == addUserDto.Login.ToLower());
 
@@ -38,8 +35,8 @@ public class UsersController : ControllerBase
         var newUser = new User
         {
             Login = addUserDto.Login,
-            Password = addUserDto.Password, // WARNING: Store hashed password in production!
-            isAdmin = addUserDto.IsAdmin ?? false // Use the DTO value, or default to false
+            Password = addUserDto.Password, 
+            isAdmin = addUserDto.IsAdmin ?? false 
         };
 
         _context.Users.Add(newUser);
@@ -55,9 +52,10 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(GetUserById), new { id = userDto.UserId }, userDto);
     }
 
-    // GET: api/Users
-    // Gets all users
+    
+    
     [HttpGet]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
     {
         var users = await _context.Users.ToListAsync();
@@ -72,8 +70,8 @@ public class UsersController : ControllerBase
         return Ok(userDtos);
     }
 
-    // GET: api/Users/{id}
-    // Gets a single user by ID
+    
+    
     [HttpGet("{id}")]
     public async Task<ActionResult<UserDto>> GetUserById(int id)
     {
@@ -95,9 +93,10 @@ public class UsersController : ControllerBase
     }
 
 
-    // PUT: api/Users/{id}
-    // Updates an existing user
+    
+    
     [HttpPut("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<ActionResult<UserDto>> UpdateUser(int id, [FromBody] UpdateUserDto updateUserDto)
     {
         if (id != updateUserDto.UserId)
@@ -112,10 +111,23 @@ public class UsersController : ControllerBase
             return NotFound($"User with ID {id} not found.");
         }
 
-        // Update properties if provided in the DTO
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int currentUserId))
+        {
+            return Unauthorized("User ID not found in token.");
+        }
+
+        bool isAdmin = User.IsInRole("Admin");
+        
+        if (!isAdmin && existingUser.UserId != currentUserId)
+        {
+            return Forbid();
+        }
+
+        
         if (!string.IsNullOrWhiteSpace(updateUserDto.Login))
         {
-            // Optional: Check for duplicate login if changing login
+            
             if (updateUserDto.Login.ToLower() != existingUser.Login?.ToLower())
             {
                 var loginExists = await _context.Users.AnyAsync(u => u.Login != null && u.Login.ToLower() == updateUserDto.Login.ToLower() && u.UserId != id);
@@ -129,7 +141,7 @@ public class UsersController : ControllerBase
 
         if (!string.IsNullOrWhiteSpace(updateUserDto.Password))
         {
-            existingUser.Password = updateUserDto.Password; // WARNING: Hash password in production!
+            existingUser.Password = updateUserDto.Password; 
         }
 
         if (updateUserDto.IsAdmin.HasValue)
@@ -139,7 +151,7 @@ public class UsersController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        // Return the updated user's DTO
+        
         var userDto = new UserDto
         {
             UserId = existingUser.UserId,
@@ -150,9 +162,10 @@ public class UsersController : ControllerBase
         return Ok(userDto);
     }
 
-    // DELETE: api/Users/{id}
-    // Deletes a user
+    
+    
     [HttpDelete("{id}")]
+    [Authorize(Policy = "AdminPolicy")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         var user = await _context.Users.FindAsync(id);
@@ -164,6 +177,6 @@ public class UsersController : ControllerBase
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
 
-        return NoContent(); // 204 No Content for successful deletion
+        return NoContent(); 
     }
 }

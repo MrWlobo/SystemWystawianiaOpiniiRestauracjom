@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using DTOs;
 using Models;
 
 
 
 [ApiController]
-[Route("api/[controller]")] // Route will be "api/Reviews"
+[Route("api/[controller]")] 
 public class ReviewsController : ControllerBase
 {
     private readonly ContextDb _context;
@@ -16,67 +18,81 @@ public class ReviewsController : ControllerBase
         _context = context;
     }
 
-    // POST: api/Reviews
-    // Adds a new review
+    
+    
     [HttpPost]
-    public async Task<ActionResult<ReviewDto>> AddReview([FromBody] AddReviewDto addReviewDto)
-    {
-        // Validation
-        if (addReviewDto.Stars < 1 || addReviewDto.Stars > 5)
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<ActionResult<ReviewDto>> AddReview([FromBody] AddReviewDto addReviewDto)
         {
-            return BadRequest("Stars must be between 1 and 5.");
-        }
-
-        // Check if User and Restaurant exist
-        var user = await _context.Users.FindAsync(addReviewDto.UserId);
-        if (user == null)
-        {
-            return NotFound($"User with ID {addReviewDto.UserId} not found.");
-        }
-        var restaurant = await _context.Restaurants.FindAsync(addReviewDto.RestaurantId);
-        if (restaurant == null)
-        {
-            return NotFound($"Restaurant with ID {addReviewDto.RestaurantId} not found.");
-        }
-
-        var newReview = new Review
-        {
-            UserId = addReviewDto.UserId,
-            RestaurantId = addReviewDto.RestaurantId,
-            Stars = addReviewDto.Stars,
-            Comment = addReviewDto.Comment
-        };
-
-        _context.Reviews.Add(newReview);
-        await _context.SaveChangesAsync();
-
-        // Load related data for the response DTO
-        var createdReview = await _context.Reviews
-            .Include(r => r.User)
-            .FirstOrDefaultAsync(r => r.ReviewId == newReview.ReviewId);
-
-        if (createdReview == null)
-        {
-            return StatusCode(500, "Failed to retrieve the newly created review.");
-        }
-
-        var reviewDto = new ReviewDto
-        {
-            ReviewId = createdReview.ReviewId,
-            Stars = createdReview.Stars,
-            Comment = createdReview.Comment,
-            User = createdReview.User != null ? new UserDto
+            
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int currentUserId))
             {
-                UserId = createdReview.User.UserId,
-                Login = createdReview.User.Login // Only send necessary user info
-            } : null
-        };
+                
+                
+                return Unauthorized("User ID not found in token or invalid.");
+            }
 
-        return CreatedAtAction(nameof(GetReviewById), new { id = reviewDto.ReviewId }, reviewDto);
-    }
+            
+            if (addReviewDto.Stars < 1 || addReviewDto.Stars > 5)
+            {
+                return BadRequest("Stars must be between 1 and 5.");
+            }
 
-    // GET: api/Reviews/{id}
-    // Helper method for CreatedAtAction and for getting a review by ID
+            
+            var restaurant = await _context.Restaurants.FindAsync(addReviewDto.RestaurantId);
+            if (restaurant == null)
+            {
+                return NotFound($"Restaurant with ID {addReviewDto.RestaurantId} not found.");
+            }
+
+            
+            var newReview = new Review
+            {
+                
+                UserId = currentUserId,
+                RestaurantId = addReviewDto.RestaurantId,
+                Stars = addReviewDto.Stars,
+                Comment = addReviewDto.Comment
+            };
+
+            
+            _context.Reviews.Add(newReview);
+            await _context.SaveChangesAsync();
+
+            
+            
+            var createdReview = await _context.Reviews
+                .Include(r => r.User)
+                .Include(r => r.Restaurant) 
+                .FirstOrDefaultAsync(r => r.ReviewId == newReview.ReviewId);
+
+            if (createdReview == null)
+            {
+                return StatusCode(500, "Failed to retrieve the newly created review after saving.");
+            }
+
+            
+            var reviewDto = new ReviewDto
+            {
+                ReviewId = createdReview.ReviewId,
+                Stars = createdReview.Stars,
+                Comment = createdReview.Comment,
+                
+                User = createdReview.User != null ? new UserDto
+                {
+                    UserId = createdReview.User.UserId,
+                    Login = createdReview.User.Login 
+                } : null,
+                
+            };
+
+            
+            return CreatedAtAction(nameof(GetReviewById), new { id = reviewDto.ReviewId }, reviewDto);
+        }
+
+    
+    
     [HttpGet("{id}")]
     public async Task<ActionResult<ReviewDto>> GetReviewById(int id)
     {
@@ -104,9 +120,10 @@ public class ReviewsController : ControllerBase
         return Ok(reviewDto);
     }
 
-    // PUT: api/Reviews/{id}
-    // Updates an existing review
+    
+    
     [HttpPut("{id}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<ActionResult<ReviewDto>> UpdateReview(int id, [FromBody] UpdateReviewDto updateReviewDto)
     {
         if (id != updateReviewDto.ReviewId)
@@ -121,7 +138,24 @@ public class ReviewsController : ControllerBase
             return NotFound($"Review with ID {id} not found.");
         }
 
-        // Update properties if provided in the DTO
+        
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int currentUserId))
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            
+            bool isAdmin = User.IsInRole("Admin");
+
+            
+            
+            if (!isAdmin && existingReview.UserId != currentUserId)
+            {
+                return Forbid(); 
+            }
+
+        
         if (updateReviewDto.Stars.HasValue)
         {
             if (updateReviewDto.Stars < 1 || updateReviewDto.Stars > 5)
@@ -137,12 +171,12 @@ public class ReviewsController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        // Re-query for the updated review, including the User
+        
         var updatedReview = await _context.Reviews
             .Include(r => r.User)
             .FirstOrDefaultAsync(r => r.ReviewId == id);
 
-        if (updatedReview == null) // Should not happen after a successful save
+        if (updatedReview == null) 
         {
             return StatusCode(500, "Failed to retrieve the updated review.");
         }
@@ -162,9 +196,10 @@ public class ReviewsController : ControllerBase
         return Ok(reviewDto);
     }
 
-    // DELETE: api/Reviews/{id}
-    // Deletes a review
+    
+    
     [HttpDelete("{id}")]
+    [Authorize(Policy = "UserPolicy")]
     public async Task<IActionResult> DeleteReview(int id)
     {
         var review = await _context.Reviews.FindAsync(id);
@@ -174,36 +209,49 @@ public class ReviewsController : ControllerBase
             return NotFound($"Review with ID {id} not found.");
         }
 
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int currentUserId))
+        {
+            return Unauthorized("User ID not found in token.");
+        }
+
+        bool isAdmin = User.IsInRole("Admin");
+        
+        if (!isAdmin && review.UserId != currentUserId)
+        {
+            return Forbid();
+        }
+
         _context.Reviews.Remove(review);
         await _context.SaveChangesAsync();
 
-        return NoContent(); // 204 No Content for successful deletion
+        return NoContent(); 
     }
 
     [HttpGet("{restaurantId}/reviews")]
     public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviewsForRestaurant(int restaurantId)
     {
-        // First, check if the restaurant itself exists
+        
         var restaurantExists = await _context.Restaurants.AnyAsync(r => r.RestaurantId == restaurantId);
         if (!restaurantExists)
         {
             return NotFound($"Restaurant with ID {restaurantId} not found.");
         }
 
-        // Retrieve reviews for the specified restaurant, including the User who wrote the review
+        
         var reviews = await _context.Reviews
             .Where(r => r.RestaurantId == restaurantId)
-            .Include(r => r.User) // Eagerly load the User for each review
+            .Include(r => r.User) 
             .ToListAsync();
 
         if (!reviews.Any())
         {
-            return Ok(new List<ReviewDto>()); // Return an empty list if no reviews are found
-            // Alternatively, you could return NotFound() if you consider a restaurant with no reviews as "not found" for this specific query,
-            // but returning an empty list is generally more user-friendly for collection endpoints.
+            return Ok(new List<ReviewDto>()); 
+            
+            
         }
 
-        // Map the entities to DTOs
+        
         var reviewDtos = reviews.Select(r => new ReviewDto
         {
             ReviewId = r.ReviewId,

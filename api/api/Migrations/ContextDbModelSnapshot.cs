@@ -114,7 +114,7 @@ namespace api.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("isAdmin")
+                    b.Property<bool>("isAdmin")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("UserId");
