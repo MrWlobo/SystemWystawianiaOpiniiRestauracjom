@@ -1960,19 +1960,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kacpe\\.nuget\\packages\\": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
-      "packagesPath": "C:\\Users\\kacpe\\.nuget\\packages\\",
-      "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\obj\\",
+      "projectPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kacpe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -2060,7 +2060,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "D:\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
       }
     }
   }
