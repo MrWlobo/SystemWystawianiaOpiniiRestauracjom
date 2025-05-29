@@ -1,0 +1,31 @@
+﻿@model List<DTOs.RestaurantListDto>
+
+@{
+    ViewData["Title"] = "Lista Restauracji";
+}
+
+<h2>Lista Restauracji</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Kuchnia</th>
+            <th>Miasto</th>
+            <th>Ulica</th>
+            <th>Numer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.RestaurantName</td>
+                <td>@restaurant.Cuisine?.CuisineName</td>
+                <td>@restaurant.Address?.City</td>
+                <td>@restaurant.Address?.Street</td>
+                <td>@restaurant.Address?.Number</td>
+            </tr>
+        }
+    </tbody>
+</table>

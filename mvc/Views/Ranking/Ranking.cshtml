@@ -1,0 +1,22 @@
+@model List<SystemWystawianiaOpiniiRestauracjom.Mvc.Models.RestaurantRankingModel>
+
+
+<h2>Ranking restauracji</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Średnia ocena</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.RestaurantName</td>
+            <td>@r.AverageRating.ToString("0.00")</td>
+        </tr>
+    }
+    </tbody>
+</table>
