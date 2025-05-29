@@ -1,0 +1,32 @@
+@model List<DTOs.ReviewDto>
+
+<h2>Opinie restauracji</h2>
+
+<form method="get" asp-controller="RestaurantReviews" asp-action="Index">
+    <label for="restaurantId">Wpisz ID restauracji:</label>
+    <input type="number" id="restaurantId" name="restaurantId" required />
+    <button type="submit">Pokaż opinie</button>
+</form>
+
+@if(ViewBag.RestaurantName != null)
+{
+    <h3>@ViewBag.RestaurantName</h3>
+}
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var review in Model)
+        {
+            <li style="margin-bottom:15px; padding:10px; border-bottom:1px solid #ccc;">
+                <strong>@review.User.Login</strong> 
+                <span> - @review.Stars</span><br />
+                <p>@review.Comment</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Brak opinii dla tej restauracji.</p>
+}
