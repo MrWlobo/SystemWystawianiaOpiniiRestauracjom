@@ -1,0 +1,28 @@
+@model List<DTOs.RestaurantDetailDto>
+
+<h2>Filtruj restauracje po kuchni</h2>
+
+<form method="get" asp-controller="CuisineFilter" asp-action="FilterByCuisineId">
+    <input type="number" name="cuisineId" placeholder="Wpisz ID kuchni" />
+    <button type="submit">Filtruj</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Restauracje z kuchnią: @ViewBag.CuisineName</h3>
+    <ul>
+        @foreach (var r in Model)
+        {
+            <li>@r.RestaurantName</li>
+        }
+    </ul>
+}
+else if (Model != null)
+{
+    <p>Brak restauracji z tą kuchnią.</p>
+}
