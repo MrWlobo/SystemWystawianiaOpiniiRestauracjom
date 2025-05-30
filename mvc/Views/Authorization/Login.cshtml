@@ -2,14 +2,32 @@
 
 <h2>Logowanie</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red; font-weight:bold;">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+else if (ViewBag.Error != null)
+{
+    <div style="color:red; font-weight:bold;">
+        @ViewBag.Error
+    </div>
+}
 
-<form method="post" asp-action="Login" asp-controller="Auth">
+<form method="post" asp-action="Login" asp-controller="Authorization">
+    @Html.AntiForgeryToken()
     <label for="Login">Login:</label><br />
-    <input asp-for="Login" id="Login" /><br />
+    <input asp-for="Login" id="Login" />
     <span asp-validation-for="Login" style="color:red"></span><br />
 
     <label for="Password">Hasło:</label><br />
-    <input asp-for="Password" id="Password" type="password" /><br />
+    <input asp-for="Password" id="Password" type="password" />
     <span asp-validation-for="Password" style="color:red"></span><br />
 
     <button type="submit">Zaloguj się</button>

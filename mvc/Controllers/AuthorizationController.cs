@@ -21,11 +21,15 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             return View();
         }
 
-        [HttpPost("login")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginRequest login)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Error = "Nieprawidłowy model xD.";
                 return View(login);
+            }
 
             var response = await _httpClient.PostAsJsonAsync("http://localhost:5185/api/Auth/login", login);
 
