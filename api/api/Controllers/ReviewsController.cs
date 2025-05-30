@@ -24,7 +24,8 @@ public class ReviewsController : ControllerBase
         [Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<ReviewDto>> AddReview([FromBody] AddReviewDto addReviewDto)
         {
-            
+            Console.WriteLine("AAAA");
+
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int currentUserId))
             {

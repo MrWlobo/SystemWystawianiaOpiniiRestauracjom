@@ -38,6 +38,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await client.PostAsJsonAsync("http://localhost:5185/api/Reviews", dto);
+            Console.WriteLine(response);
 
             if (!response.IsSuccessStatusCode)
             {

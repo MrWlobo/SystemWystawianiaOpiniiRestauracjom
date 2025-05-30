@@ -25,12 +25,13 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
         public async Task<IActionResult> Login1(LoginR.LoginRequest login)
         {
             Console.WriteLine(login.Login1);
-            Console.WriteLine(login.Password1);
+            Console.WriteLine(login.Password);
 
             if (!ModelState.IsValid)
                 return View(login);
 
             var response = await _httpClient.PostAsJsonAsync("http://localhost:5185/api/Auth/login", login);
+            Console.WriteLine(response);
 
             if (!response.IsSuccessStatusCode)
             {

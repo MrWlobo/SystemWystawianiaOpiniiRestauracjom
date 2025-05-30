@@ -59,7 +59,7 @@ namespace JwtAuthDemo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Login == request.Login);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Login == request.Login1);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
             {

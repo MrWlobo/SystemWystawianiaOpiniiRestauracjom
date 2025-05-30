@@ -7,6 +7,6 @@ namespace LoginR
     public string Login1 { get; set; }
 
     [Required]
-    public string Password1 { get; set; }
+    public string Password { get; set; }
 }
 }
