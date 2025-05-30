@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
 using BCrypt.Net;
+using Db;
 
 namespace JwtAuthDemo.Controllers
 {
@@ -17,10 +18,9 @@ namespace JwtAuthDemo.Controllers
         private readonly ContextDb _context;
         private readonly IConfiguration _configuration;
 
-        public AuthController(ContextDb context, IConfiguration configuration)
+        public AuthController(ContextDb context)
         {
             _context = context;
-            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -52,6 +52,8 @@ namespace JwtAuthDemo.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
+            Console.WriteLine(request);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -66,11 +68,16 @@ namespace JwtAuthDemo.Controllers
 
             
             var tokenHandler = new JwtSecurityTokenHandler();
-            var secret = _configuration["JwtSettings:Secret"];
+            // var secret = _configuration["JwtSettings:Secret"];
+            string secret = "abcdefghijklmnoprstuwxyz1234567890ABCDEFGH";
             var key = Encoding.UTF8.GetBytes(secret ?? string.Empty);
-            var issuer = _configuration["JwtSettings:Issuer"];
-            var audience = _configuration["JwtSettings:Audience"];
-            var expiresInMinutes = double.Parse(_configuration["JwtSettings:ExpiresInMinutes"] ?? "60");
+            // var issuer = _configuration["JwtSettings:Issuer"];
+            // var audience = _configuration["JwtSettings:Audience"];
+            // var expiresInMinutes = double.Parse(_configuration["JwtSettings:ExpiresInMinutes"] ?? "60");
+            var issuer = "YourAppIssuer";
+            var audience = "YourAppAudience";
+            var expiresInMinutes = 60.0;
+
 
             var claims = new List<Claim>
             {

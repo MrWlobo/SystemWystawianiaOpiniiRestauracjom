@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj": {}
+    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {
+    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
+        "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\obj\\",
+        "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj",
+        "packagesPath": "C:\\Users\\kacpe\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kacpe\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -102,21 +102,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj": {
+    "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj",
+        "projectUniqueName": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj",
         "projectName": "SystemWystawianiaOpiniiRestauracjom",
-        "projectPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\obj\\",
+        "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\SystemWystawianiaOpiniiRestauracjom.csproj",
+        "packagesPath": "C:\\Users\\kacpe\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\mvc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kacpe\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -128,8 +128,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {
-                "projectPath": "C:\\Users\\Dell\\Desktop\\Studia\\2 Rok\\PZ2\\Programy\\Projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj"
+              "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj": {
+                "projectPath": "D:\\Desktop\\pz2\\projekt\\SystemWystawianiaOpiniiRestauracjom\\api\\api\\api.csproj"
               }
             }
           }
@@ -188,7 +188,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "D:\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     }

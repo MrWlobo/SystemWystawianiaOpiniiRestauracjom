@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using LoginR;
 using DTOs;
 
 namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
@@ -21,9 +22,11 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             return View();
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest login)
+        public async Task<IActionResult> Login1(LoginR.LoginRequest login)
         {
+            Console.WriteLine(login.Login1);
+            Console.WriteLine(login.Password1);
+
             if (!ModelState.IsValid)
                 return View(login);
 

@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Db;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+Console.WriteLine($"Current ASPNETCORE_ENVIRONMENT: {builder.Environment.EnvironmentName}");
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secret = jwtSettings["Secret"];
@@ -82,14 +85,13 @@ builder.Services.AddDbContext<ContextDb>(options =>
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment()) 
-{
+
     app.UseSwagger();     
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name V1");
     });
-}
+
 
 
 
