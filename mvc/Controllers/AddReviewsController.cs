@@ -25,7 +25,9 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddReviewDto dto)
         {
-            var token = HttpContext.Session.GetString("JtwToken");
+            Console.WriteLine("AAAAAAAAAAAAAA");
+
+            var token = HttpContext.Session.GetString("JwtToken");
 
             if (string.IsNullOrEmpty(token))
             {
@@ -33,6 +35,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
                 return View("AddReviews", dto);
             }
 
+            Console.WriteLine(dto);
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
