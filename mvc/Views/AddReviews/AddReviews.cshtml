@@ -1,0 +1,16 @@
+@model DTOs.AddReviewDto
+
+<h2>Dodaj opinię</h2>
+
+<form method="post" asp-action="Add">
+    <label>ID restauracji:</label><br />
+    <input type="number" asp-for="RestaurantId" required /><br /><br />
+
+    <label>Liczba gwiazdek:</label><br />
+    <input type="number" asp-for="Stars" required /><br /><br />
+
+    <label>Komentarz:</label><br />
+    <textarea asp-for="Comment" rows="4" cols="50"></textarea><br /><br />
+
+    <button type="submit">Dodaj opinię</button>
+</form>

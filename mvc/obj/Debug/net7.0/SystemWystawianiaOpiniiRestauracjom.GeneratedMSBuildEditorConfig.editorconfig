@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Dell\Desktop\Studia\2 Rok\PZ2\Programy\Projekt\SystemWystawianiaOpiniiRestauracjom\mvc
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Dell/Desktop/Studia/2 Rok/PZ2/Programy/Projekt/SystemWystawianiaOpiniiRestauracjom/mvc/Views/AddReviews/AddReviews.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkUmV2aWV3c1xBZGRSZXZpZXdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dell/Desktop/Studia/2 Rok/PZ2/Programy/Projekt/SystemWystawianiaOpiniiRestauracjom/mvc/Views/Authorization/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yaXphdGlvblxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dell/Desktop/Studia/2 Rok/PZ2/Programy/Projekt/SystemWystawianiaOpiniiRestauracjom/mvc/Views/CuisineFilter/CuisineFilter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vpc2luZUZpbHRlclxDdWlzaW5lRmlsdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
