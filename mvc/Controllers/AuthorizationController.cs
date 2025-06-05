@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using LoginR;
 using DTOs;
 
 namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
@@ -21,10 +22,11 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRequest login)
+        public async Task<IActionResult> Login1(LoginR.LoginRequest login)
         {
+            Console.WriteLine(login.Login1);
+            Console.WriteLine(login.Password);
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Error = "Nieprawidłowy model xD.";
@@ -32,6 +34,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             }
 
             var response = await _httpClient.PostAsJsonAsync("http://localhost:5185/api/Auth/login", login);
+            Console.WriteLine(response);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -58,7 +61,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Login1", "Authorization");
         }
     }
 }

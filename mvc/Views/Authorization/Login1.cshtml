@@ -1,0 +1,40 @@
+@model LoginR.LoginRequest
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login1</title>
+</head>
+<body>
+
+    <h2>Login1</h2>
+
+    <form method="POST" asp-action="Login1" asp-controller="Authorization">
+        <div>
+            <label for="Login1">Login:</label><br />
+            <input asp-for="Login1" id="Login1" name="Login1"/><br />
+            <span asp-validation-for="Login1" style="color:red"></span>
+        </div>
+        <br />
+        <div>
+            <label for="Password">Password:</label><br />
+            <input asp-for="Password" id="Password" type="password" name="Password"/><br />
+            <span asp-validation-for="Password" style="color:red"></span>
+        </div>
+        <br />
+        @* Display error message from ViewBag if present *@
+        @if (ViewBag.Error != null)
+        {
+            <div style="color:red;">@ViewBag.Error</div>
+        }
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+</body>
+</html>

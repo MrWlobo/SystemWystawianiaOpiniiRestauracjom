@@ -3,9 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine($"Current ASPNETCORE_ENVIRONMENT: {builder.Environment.EnvironmentName}");
+
+
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ContextDb>(options =>

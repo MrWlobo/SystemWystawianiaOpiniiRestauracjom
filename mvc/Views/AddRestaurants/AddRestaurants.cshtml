@@ -1,0 +1,34 @@
+@model AddRestaurantDto
+
+<h2>Dodaj restaurację</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color:red">@ViewBag.Error</div>
+}
+
+<form method="post" asp-action="Add" asp-controller="AddRestaurants">
+    <label>Nazwa restauracji:</label><br />
+    <input asp-for="RestaurantName" /><br /><br />
+
+    <label>ID kuchni:</label><br />
+    <input asp-for="CuisineId" type="number" /><br /><br />
+
+    <fieldset>
+        <legend>Adres</legend>
+        <label>Miasto:</label><br />
+        <input asp-for="Address.City" /><br /><br />
+
+        <label>Ulica:</label><br />
+        <input asp-for="Address.Street" /><br /><br />
+
+        <label>Numer:</label><br />
+        <input asp-for="Address.Number" /><br /><br />
+    </fieldset>
+
+    <button type="submit">Dodaj</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
