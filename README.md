@@ -38,6 +38,20 @@
   - dodawanie restauracji
 
 ## Do czego służy aplikacja?
+  Aplikacja służy przede wszystkim do wystawiania ocen restauracjom przez użytkowników oraz ich przeglądania. Oprócz tego pozwala dodać do bazy danych informacje o nowej restauracji, a także wyświetlić ich ranking.
 
 ## Funkcjonalności
+  - Obsługa kont
+    - Logowanie
+    - Rejestracja
+    - Wylogowanie
+  - Dostępne przed zalogowaniem
+    - Wyświetlenie informacji o wszystkich restauracjach
+    - Wyświetlenie rankingu restauracji po średniej ocen
+    - Flitrowanie restauracji po kuchni
+    - Przeglądanie ocen wybranej restauracji
+  - Dostępne po zalogowaniu
+    - Wszystkie dostępne przed zalogowaniem
+    - Dodanie opinii
+    - Dodanie restauracji
 
