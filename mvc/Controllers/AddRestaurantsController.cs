@@ -36,7 +36,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             if (string.IsNullOrEmpty(token))
             {
                 ViewBag.Error = "Brak autoryzacji. Zaloguj się.";
-                return View("AddRestaurants", dto);
+                return RedirectToAction("Login1", "Authorization");
             }
 
             var client = _httpClientFactory.CreateClient();

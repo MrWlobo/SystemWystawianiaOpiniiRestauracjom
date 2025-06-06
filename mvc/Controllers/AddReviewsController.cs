@@ -31,7 +31,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             if (string.IsNullOrEmpty(token))
             {
                 ViewBag.Error = "Brak autoryzacji. Zaloguj się.";
-                return View("AddReviews", dto);
+                return RedirectToAction("Login1", "Authorization");
             }
 
             Console.WriteLine(dto);

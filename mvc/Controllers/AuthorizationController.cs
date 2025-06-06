@@ -29,7 +29,6 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.Error = "Nieprawidłowy model xD.";
                 return View(login);
             }
 
