@@ -30,7 +30,7 @@ namespace SystemWystawianiaOpiniiRestauracjom.Mvc.Controllers
             if (reviews == null || !reviews.Any())
             {
                 ViewBag.Error = "Brak opinii dla wybranej restauracji lub restauracja nie istnieje.";
-                return View(new List<ReviewDto>());
+                return View("RestaurantReviews", new List<ReviewDto>());
             }
 
             ViewBag.RestaurantId = restaurantId;
